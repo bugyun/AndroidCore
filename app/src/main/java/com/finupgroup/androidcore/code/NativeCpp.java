@@ -18,10 +18,12 @@ public class NativeCpp {
     }
 
 
-    
-
-
-
+    public void test() {
+        NativeCpp nativeCpp = new NativeCpp();
+        // Example of a call to a native method
+//        TextView tv = (TextView) findViewById(R.id.sample_text);
+//        tv.setText(nativeCpp.stringFromJNI());
+    }
 
 
 }
