@@ -1,5 +1,6 @@
 package com.finupgroup.androidcore;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
@@ -30,5 +31,17 @@ public class MainActivity extends AppCompatActivity {
         kLogTest.logWithParams();
         kLogTest.logWithTag();
     }
+
+
+    /**
+     * 拦截 Back 键，使 App 进入后台而不是关闭
+     */
+    @Override
+    public void onBackPressed() {
+        Intent launcherIntent = new Intent(Intent.ACTION_MAIN);
+        launcherIntent.addCategory(Intent.CATEGORY_HOME);
+        startActivity(launcherIntent);
+    }
+
 
 }
