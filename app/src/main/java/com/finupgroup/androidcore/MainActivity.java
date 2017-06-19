@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.finupgroup.androidcore.manager.AppManager;
 import com.finupgroup.androidcore.test.KLogTest;
@@ -66,14 +67,22 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    private long lastTime;
+
     /**
      * 拦截 Back 键，使 App 进入后台而不是关闭
      */
     @Override
     public void onBackPressed() {
-        Intent launcherIntent = new Intent(Intent.ACTION_MAIN);
-        launcherIntent.addCategory(Intent.CATEGORY_HOME);
-        startActivity(launcherIntent);
+        long currentTime = System.currentTimeMillis();
+        if (currentTime - lastTime < 2 * 1000) {
+            Intent launcherIntent = new Intent(Intent.ACTION_MAIN);
+            launcherIntent.addCategory(Intent.CATEGORY_HOME);
+            startActivity(launcherIntent);
+        } else {
+            Toast.makeText(this, "请再按一次", Toast.LENGTH_SHORT).show();
+            lastTime = currentTime;
+        }
     }
 
 
