@@ -1,5 +1,15 @@
 apply plugin: 'com.android.application'
 
+
+def keystorePropertiesFile = rootProject.file("keystore.properties")
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+def releaseTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
+}
+
+
 android {
     compileSdkVersion 25
     buildToolsVersion "25.0.2"
@@ -32,26 +42,105 @@ android {
 
 
     }
+
+    dataBinding {
+        enabled = true
+    }
+
+    signingConfigs {
+        config {
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+        }
+    }
+
     buildTypes {
-        debug {
-            buildConfigField "boolean", "LOG_DEBUG", "true"
+        debug { // debug模式
+            buildConfigField "int", "LOG_LEVEL", "6"//全部显示log日志
+            buildConfigField "boolean", "IS_DEBUG", "true"
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
-
-
         release {
-
-            buildConfigField "boolean", "LOG_DEBUG", "false"
+            buildConfigField "int", "LOG_LEVEL", "0"//不显示log日志
+            buildConfigField "boolean", "IS_DEBUG", "false"
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+
+            applicationVariants.all { variant ->
+                variant.outputs.each { output ->
+                    def outputFile = output.outputFile
+                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+                        // 输出apk名称为boohee_v1.0_2015-01-15_wandoujia.apk
+                        def fileName = "Bestbuy_v${defaultConfig.versionName}_${releaseTime()}_${variant.productFlavors[0].name}.apk"
+                        output.outputFile = new File(outputFile.parent, fileName)
+                    }
+                }
+            }
         }
+    }
+
+    compileOptions {
+        sourceCompatibility SOURCE_COMPATIBILITY
+        targetCompatibility TARGET_COMPATIBILITY
+    }
+
+    dexOptions {
+        javaMaxHeapSize JAVA_MAX_HEAPSIZE
+
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    aaptOptions {    // 取消掉系统对.9图片的检查
+        cruncherEnabled = false
+        useNewCruncher = false
+
     }
     externalNativeBuild {
         cmake {
             path "CMakeLists.txt"
         }
+    }
+
+    //多渠道打包
+    productFlavors {
+        bestbuy {}// 官网包
+        umeng {}//友盟推送更新
+        _360 {}//360
+        tencent {}//腾讯
+        baidu {}//百度
+        _91 {}//
+        wandoujia {}//豌豆荚
+        anzhuo {}//
+        anzhi {}//
+        jifeng {}//
+        yingyonghui {}//应用汇
+        mumayi {}
+        nduoa {}
+        googleplay {}
+        suning {}//
+        sogou {}
+        zhongyong {}//众用助手
+        MMshequ {}//MM社区
+        uc {}
+        liantong {}//联通沃社区
+        xiaomi {}//xiaomi
+        lenovomm {}
+        Mstore {}//魅族Mstore
+        huawei {}//
+        zhongxing {}//中兴
+        oppope {}
+    }
+    productFlavors.all {
+        flavor -> flavor.manifestPlaceholders = [BUGLY_APP_CHANNEL: name]
     }
 
 

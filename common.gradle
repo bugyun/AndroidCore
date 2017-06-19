@@ -1,0 +1,54 @@
+ext {// 通用配置
+
+    JAVAV_ERSION = 7
+    JAVA_MAX_HEAPSIZE = '4G'
+
+    //android编译版本相关
+    BUILD_SDK_VERSION = 25
+    BUILD_TOOLS_VERSION = "25.0.2"
+
+    //build config
+    MIN_SDK_VERSION = 14
+    TARGT_SDK_VERSION = 25
+
+    //编译版本号
+    VERSION_CODE = 1
+    VERSION_NAME = "1.0"
+
+    SOURCE_COMPATIBILITY = this.&getJavaVersion()
+    TARGET_COMPATIBILITY = this.&getJavaVersion()
+
+    //appket
+    UMENG_CHANNEL_VALUE_XIAOMI = 'xiaomi_appkey'
+    UMENG_CHANNEL_VALUE_GOOGLE = 'googlepaly_appkey'
+}
+
+def getJavaVersion() {
+    switch (JAVAV_ERSION) {
+        case "6":
+            return JavaVersion.VERSION_1_6
+        case "7":
+            return JavaVersion.VERSION_1_7
+        case "8":
+            return JavaVersion.VERSION_1_8
+        case "9":
+            return JavaVersion.VERSION_1_9
+        default:
+            return JavaVersion.VERSION_1_7
+    }
+}
+//使用方法
+//apply from: 'common.gradle'
+//android {
+//    compileSdkVersion BUILD_SDK_VERSION //SDK编译版本
+//    buildToolsVersion BUILD_TOOLS_VERSION//构建工具版本 对应buildTool
+//
+//    defaultConfig {
+//        applicationId "com.yuan.agradle" //配置包名
+//        minSdkVersion MIN_SDK_VERSION // 最小支持sdk版本
+//        targetSdkVersion TARGT_SDK_VERSION // 目标sdk版本
+//        versionCode VERSION_CODE//版本号
+//        versionName VERSION_NAME //版本名称
+//    }
+//}
+
