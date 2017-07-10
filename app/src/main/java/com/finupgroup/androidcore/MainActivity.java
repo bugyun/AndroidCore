@@ -36,8 +36,6 @@ public class MainActivity extends AppCompatActivity {
             finish();
             return;
         }
-
-
     }
 
     private void jumpFromBrowser(Uri data) {
