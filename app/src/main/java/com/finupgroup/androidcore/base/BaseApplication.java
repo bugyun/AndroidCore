@@ -13,6 +13,6 @@ public class BaseApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        KLog.init(BuildConfig.LOG_DEBUG, "zyh");
+        KLog.init(BuildConfig.IS_DEBUG, "zyh");
     }
 }

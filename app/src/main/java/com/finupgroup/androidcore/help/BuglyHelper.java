@@ -18,7 +18,7 @@ public class BuglyHelper {
         strategy.setAppChannel("myChannel");  //设置渠道
         strategy.setAppVersion("1.0.1");      //App的版本
         strategy.setAppPackageName("com.tencent.xx");  //App的包名
-        CrashReport.initCrashReport(context, "注册时申请的APPID", BuildConfig.LOG_DEBUG, strategy);
+        CrashReport.initCrashReport(context, "注册时申请的APPID", BuildConfig.IS_DEBUG, strategy);
         CrashReport.setIsDevelopmentDevice(context, BuildConfig.DEBUG);
     }
 
