@@ -25,7 +25,6 @@ public class CountDownTime {
     private CountDownTime() {
     }
 
-
     public void startWatcher(final Watcher object) {
         objectList.add(object);
         if (!timerHashMap.containsKey(object.getName())) {
@@ -46,7 +45,6 @@ public class CountDownTime {
                         timerHashMap.remove(object.getName());
                     }
                 }
-
             });
         }
     }
