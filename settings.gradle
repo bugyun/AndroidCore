@@ -1,1 +1,1 @@
-include ':app', ':counttime'
+include ':app', ':counttime', ':baselibrary', ':httpbird'
