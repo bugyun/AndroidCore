@@ -8,6 +8,9 @@ import android.util.Log;
 
 import com.finupgroup.androidcore.manager.AppManager;
 import com.finupgroup.androidcore.test.KLogTest;
+import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
+import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import java.util.List;
 
@@ -36,6 +39,17 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
+        RefreshLayout refreshLayout = (RefreshLayout)findViewById(R.id.refreshLayout);
+        refreshLayout.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh(RefreshLayout refreshlayout) {
+            }
+        });
+        refreshLayout.setOnLoadmoreListener(new OnLoadmoreListener() {
+            @Override
+            public void onLoadmore(RefreshLayout refreshlayout) {
+            }
+        });
 
     }
 
