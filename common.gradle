@@ -1,6 +1,6 @@
 ext {// 通用配置
 
-    JAVAV_ERSION = 7
+    JAVAV_ERSION = 8
     JAVA_MAX_HEAPSIZE = '4G'
 
     //android编译版本相关

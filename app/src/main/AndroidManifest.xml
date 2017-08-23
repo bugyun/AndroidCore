@@ -11,18 +11,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:node="replace"
-        >
+        tools:node="replace">
         <activity
             android:name=".MainActivity"
             android:allowTaskReparenting="true">
 
             <!-- 将Activity从其他任务栈中移到自己的任务栈中 -->
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN"/>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN"/> -->
 
-            <!--<category android:name="android.intent.category.LAUNCHER"/>-->
-            <!--</intent-filter>-->
+
+            <!-- <category android:name="android.intent.category.LAUNCHER"/> -->
+            <!-- </intent-filter> -->
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
 
@@ -38,6 +38,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Main2Activity">
+
             <!-- 将Activity从其他任务栈中移到自己的任务栈中 -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

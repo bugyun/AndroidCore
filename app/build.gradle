@@ -20,6 +20,9 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        flavorDimensions "debug", "release"
+
         externalNativeBuild {
             cmake {
                 // 配置CMake可选参数
@@ -38,6 +41,12 @@ android {
             // libraries Gradle should build and package with your APK.
             // abiFilters 后面的ABI类型即为要打包进apk的ABI类型，除此以外都不打包进apk里
             abiFilters 'armeabi'//, 'armeabi-v7a', 'x86', 'x86_64', 'arm64-v8a'
+        }
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath false
+            }
         }
 
 
@@ -110,38 +119,67 @@ android {
         }
     }
 
-    //多渠道打包
+//下面的方式在android studio 3.0 以上失效
     productFlavors {
-        bestbuy {}// 官网包
-        umeng {}//友盟推送更新
-        _360 {}//360
-        tencent {}//腾讯
-        baidu {}//百度
-        _91 {}//
-        wandoujia {}//豌豆荚
-        anzhuo {}//
-        anzhi {}//
-        jifeng {}//
-        yingyonghui {}//应用汇
-        mumayi {}
-        nduoa {}
-        googleplay {}
-        suning {}//
-        sogou {}
-        zhongyong {}//众用助手
-        MMshequ {}//MM社区
-        uc {}
-        liantong {}//联通沃社区
-        xiaomi {}//xiaomi
-        lenovomm {}
-        Mstore {}//魅族Mstore
-        huawei {}//
-        zhongxing {}//中兴
-        oppope {}
+        demo {
+            dimension "debug"
+//            applicationIdSuffix ".demo"
+        }
+        prod {
+            dimension "release"
+        }
     }
-    productFlavors.all {
-        flavor -> flavor.manifestPlaceholders = [BUGLY_APP_CHANNEL: name]
-    }
+
+//    //多渠道打包
+//    productFlavors {
+//        bestbuy {
+//            dimension "default"
+//        }// 官网包
+//        umeng {
+//            dimension "default"
+//        }//友盟推送更新
+//        _360 {
+//            dimension "default"
+//        }//360
+//        tencent {
+//            dimension "default"
+//        }//腾讯
+//        baidu {
+//            dimension "default"
+//        }//百度
+//        _91 {
+//            dimension "default"
+//        }//
+//        wandoujia {
+//            dimension "default"
+//        }//豌豆荚
+//        anzhuo {
+//            dimension "default"
+//        }//
+//        anzhi {
+//            dimension "default"
+//        }//
+////        jifeng {}//
+////        yingyonghui {}//应用汇
+////        mumayi {}
+////        nduoa {}
+////        googleplay {}
+////        suning {}//
+////        sogou {}
+////        zhongyong {}//众用助手
+////        MMshequ {}//MM社区
+////        uc {}
+////        liantong {}//联通沃社区
+////        xiaomi {}//xiaomi
+////        lenovomm {}
+////        Mstore {}//魅族Mstore
+////        huawei {}//
+////        zhongxing {}//中兴
+////        oppope {}
+//    }
+//    productFlavors.all {
+//        flavor -> flavor.manifestPlaceholders = [BUGLY_APP_CHANNEL: name]
+//    }
 
 
     splits {//拆分apk
@@ -154,26 +192,46 @@ android {
     }
 }
 
+//implementation	compile
+//api	compile
+//compileOnly	provided
+//runtimeOnly	apk
+// annotationProcessor 'com.google.dagger:dagger-compiler:<version-number>'
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile project(':baselibrary')
-    compile project(':counttime')
-    compile project(':httpbird')
-    compile 'com.android.support:appcompat-v7:26.+'
+    implementation project(':baselibrary')
+    implementation project(':counttime')
+    implementation project(':httpbird')
+    implementation 'com.android.support:appcompat-v7:26.+'
 
-    compile 'com.android.support:design:26.+'
+    implementation 'com.android.support:design:26.+'
 
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.github.zhaokaiqiang.klog:library:1.6.0'
-    compile 'com.tencent.bugly:crashreport:latest.release'
-    compile 'com.gyf.barlibrary:barlibrary:2.2.2'
-    compile 'com.squareup.okhttp3:okhttp:3.8.0'
-    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.2-alpha-5'
-    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.2-alpha-5'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.github.zhaokaiqiang.klog:library:1.6.0'
+    implementation 'com.tencent.bugly:crashreport:latest.release'
+    implementation 'com.gyf.barlibrary:barlibrary:2.2.2'
+    implementation 'com.squareup.okhttp3:okhttp:3.8.0'
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.2-alpha-5'
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.2-alpha-5'
     //If you use the special Header
-    compile 'com.android.support:recyclerview-v7:26+'
+    implementation 'com.android.support:recyclerview-v7:26+'
     testCompile 'junit:junit:4.12'
+
+    //For Lifecycles, LiveData, and ViewModel, add:
+    implementation "android.arch.lifecycle:runtime:1.0.0-alpha9"
+    implementation "android.arch.lifecycle:extensions:1.0.0-alpha9"
+    annotationProcessor "android.arch.lifecycle:compiler:1.0.0-alpha9"
+
+    //For Room, add:
+    implementation "android.arch.persistence.room:runtime:1.0.0-alpha9"
+    annotationProcessor "android.arch.persistence.room:compiler:1.0.0-alpha9"
+
+    //For testing Room migrations, add:
+    testCompile "android.arch.persistence.room:testing:1.0.0-alpha9"
+
+    //For Room RxJava support, add:
+    implementation "android.arch.persistence.room:rxjava2:1.0.0-alpha9"
 }
