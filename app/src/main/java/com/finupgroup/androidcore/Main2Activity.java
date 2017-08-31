@@ -15,5 +15,14 @@ public class Main2Activity extends AppCompatActivity {
         DefaultNavigationBar navigationBar = new DefaultNavigationBar.Builder(this)//
                 .setTitle("nihao")//
                 .builder();
+
+
+
+
+
+
+
+
     }
+
 }

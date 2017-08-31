@@ -34,7 +34,7 @@
                     android:host="goods"
                     android:path="/goodsDetail"
                     android:port="8888"
-                    android:scheme="androidCore"/>
+                    android:scheme="1232"/>
             </intent-filter>
         </activity>
         <activity android:name=".Main2Activity">

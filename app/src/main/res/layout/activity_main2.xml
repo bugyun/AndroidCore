@@ -24,4 +24,16 @@
     <!--</android.support.v7.widget.Toolbar>-->
     <!--</android.support.design.widget.AppBarLayout>-->
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary"/>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="50pt"
+        android:background="@color/colorPrimaryDark"/>
+
+
 </LinearLayout>
