@@ -234,4 +234,6 @@ dependencies {
 
     //For Room RxJava support, add:
     implementation "android.arch.persistence.room:rxjava2:1.0.0-alpha9"
+
+    implementation 'com.lzy.widget:view-core:0.2.3'
 }
